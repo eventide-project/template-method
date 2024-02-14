@@ -4,6 +4,7 @@ puts RUBY_DESCRIPTION
 
 require_relative '../init.rb'
 require 'template_method/controls'
+Controls = TemplateMethod::Controls
 
 require 'pp'
 
