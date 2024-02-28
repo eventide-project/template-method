@@ -1,7 +1,7 @@
 module TemplateMethod
   module Macro
     def template_method_macro(method_name, &implementation)
-      implementation ||= -> { nil }
+      implementation ||= proc { |*| nil }
 
       inherit = false
       concrete_implementation_exists = method_defined?(method_name, inherit)
