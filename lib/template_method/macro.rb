@@ -3,19 +3,13 @@ module TemplateMethod
     def template_method_macro(method_name, &implementation)
       implementation ||= proc { |*| nil }
 
-      inherit = false
+      inherit = true
       concrete_implementation_exists = method_defined?(method_name, inherit)
       if concrete_implementation_exists
         return
       end
 
-      define_method(method_name) do |*args, **kwargs, &blk|
-        if defined?(super)
-          return super(*args, **kwargs, &blk)
-        end
-
-        implementation.(*args, **kwargs, &blk)
-      end
+      template_method_defaults_module.define_method(method_name, &implementation)
     end
     alias :template_method :template_method_macro
 
@@ -31,6 +25,16 @@ module TemplateMethod
         'template_method',
         'template_method!'
       ]
+    end
+
+    def template_method_defaults_module
+      @template_method_defaults_module ||= include_template_method_defaults_module
+    end
+
+    def include_template_method_defaults_module
+      mod = Module.new
+      include mod
+      mod
     end
   end
 end
