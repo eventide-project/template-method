@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |s|
   s.name = 'evt-template_method'
-  s.version = '0.0.0.0'
+  s.version = '2.0.0.0'
   s.summary = 'Template method declaration'
   s.description = ' '
 
