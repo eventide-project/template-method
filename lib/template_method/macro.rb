@@ -1,5 +1,15 @@
 module TemplateMethod
   module Macro
+    def template_method_module
+      @template_method_module ||= include_template_method_module
+    end
+
+    def include_template_method_module
+      mod = Module.new
+      include mod
+      mod
+    end
+
     def template_method_macro(method_name, &implementation)
       implementation ||= proc { |*| nil }
 
@@ -9,7 +19,7 @@ module TemplateMethod
         return
       end
 
-      template_method_defaults_module.define_method(method_name, &implementation)
+      template_method_module.define_method(method_name, &implementation)
     end
     alias :template_method :template_method_macro
 
@@ -25,16 +35,6 @@ module TemplateMethod
         'template_method',
         'template_method!'
       ]
-    end
-
-    def template_method_defaults_module
-      @template_method_defaults_module ||= include_template_method_defaults_module
-    end
-
-    def include_template_method_defaults_module
-      mod = Module.new
-      include mod
-      mod
     end
   end
 end
