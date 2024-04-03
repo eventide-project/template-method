@@ -24,7 +24,7 @@ module TemplateMethod
     alias :template_method :template_method_macro
 
     def template_method_variant_macro(method_name)
-      template_method_macro(method_name) do
+      template_method_macro(method_name) do |*|
         raise TemplateMethod::Error, "Implementation is required (Method name: #{method_name})"
       end
     end
