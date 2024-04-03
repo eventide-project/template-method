@@ -71,6 +71,33 @@ module TemplateMethod
         end
       end
 
+      module Prepended
+        def self.example
+          Example.new
+        end
+
+        class Example
+          module PrependedModule
+            def self.included(cls)
+              cls.class_exec do
+                include ::TemplateMethod
+
+                prepend SomeMethod
+
+                template_method :some_method
+              end
+            end
+
+            module SomeMethod
+              def some_method
+                super
+              end
+            end
+          end
+          include PrependedModule
+        end
+      end
+
       module Variant
         def self.example
           Example.new

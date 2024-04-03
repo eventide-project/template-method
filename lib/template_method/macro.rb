@@ -13,8 +13,14 @@ module TemplateMethod
     def template_method_macro(method_name, &implementation)
       implementation ||= proc { |*| nil }
 
-      inherit = true
-      concrete_implementation_exists = method_defined?(method_name, inherit)
+      ancestors_without_prepended_modules = ancestors.drop_while do |ancestor|
+        ancestor != self
+      end
+
+      concrete_implementation_exists = ancestors_without_prepended_modules.any? do |ancestor|
+        ancestor.method_defined?(method_name, false)
+      end
+
       if concrete_implementation_exists
         return
       end
