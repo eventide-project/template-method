@@ -22,10 +22,11 @@ module TemplateMethod
   end
 
   def self.subject_class(subject)
-    if [Module, Class].include?(subject)
-      return subject
+    case subject
+    when Module, Class
+      subject
     else
-      return subject.class
+      subject.class
     end
   end
 end
