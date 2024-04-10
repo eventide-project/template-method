@@ -1,9 +1,6 @@
 module TemplateMethod
   def self.activate(target_class=nil)
     target_class ||= Object
-
-    return if target_class.ancestors.include?(TemplateMethod::Macro)
-
     target_class.extend(TemplateMethod::Macro)
   end
 
