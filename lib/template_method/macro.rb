@@ -18,7 +18,8 @@ module TemplateMethod
       end
 
       concrete_implementation_exists = ancestors_without_prepended_modules.any? do |ancestor|
-        ancestor.method_defined?(method_name, false)
+        ancestor.method_defined?(method_name, false) ||
+          ancestor.private_method_defined?(method_name, false)
       end
 
       if concrete_implementation_exists
