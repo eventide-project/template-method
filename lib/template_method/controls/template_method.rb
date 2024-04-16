@@ -33,7 +33,7 @@ module TemplateMethod
           template_method :some_method
 
           def some_method
-            "some concrete result"
+            'some value'
           end
         end
 
@@ -44,7 +44,7 @@ module TemplateMethod
 
           class Example
             def some_method
-              "some concrete result"
+              'some value'
             end
 
             include ::TemplateMethod
@@ -63,7 +63,7 @@ module TemplateMethod
 
             module SomeModule
               def some_method
-                "some module concrete result"
+                'some value'
               end
             end
             include SomeModule
@@ -108,7 +108,7 @@ module TemplateMethod
           template_method! :some_method
 
           def some_method
-            'some concrete result'
+            'some value'
           end
         end
 
