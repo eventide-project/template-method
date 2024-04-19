@@ -1,18 +1,15 @@
 require_relative '../automated_init'
 
 context "Template Method" do
-  context "Not Implemented" do
-    context "Method Arguments" do
-      some_argument = 'some argument'
-      some_other_argument = 'some other argument'
+  context "Method Arguments" do
+    some_argument = 'some argument'
+    some_other_argument = 'some other argument'
 
-      example = Controls::TemplateMethod.example
-      response = example.some_method(some_argument, some_other_argument)
+    example = Controls::TemplateMethod.example
 
-      not_implemented = response.nil?
-
-      test do
-        assert(not_implemented)
+    test "Does not raise an ArgumentError" do
+      refute_raises(ArgumentError) do
+        example.some_method(some_argument, some_other_argument)
       end
     end
   end

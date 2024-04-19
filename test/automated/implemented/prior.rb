@@ -1,8 +1,8 @@
 require_relative '../automated_init'
 
 context "Template Method" do
-  context "Already Implemented When Macro Invoked" do
-    example = Controls::TemplateMethod::Implemented::AlreadyImplemented.example
+  context "Prior Implementation" do
+    example = Controls::TemplateMethod::Implemented::Prior.example
     response = example.some_method
 
     overridden = response.nil?

@@ -2,13 +2,12 @@ require_relative '../automated_init'
 
 context "Template Method Variant" do
   context "Implemented" do
-    example = Controls::TemplateMethod::Variant.example
-    response = example.some_method
+    example = Controls::TemplateMethod::Variant::Implemented.example
 
-    implemented = !response.nil?
-
-    test do
-      assert(implemented)
+    test "Does not raise an error" do
+      refute_raises(TemplateMethod::Error) do
+        example.some_method
+      end
     end
   end
 end
