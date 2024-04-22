@@ -30,6 +30,25 @@ module TemplateMethod
           end
         end
 
+        module Subsequent
+          def self.example
+            Example.new
+          end
+
+          module Concrete
+          end
+
+          class Example
+            include Concrete
+            include ::TemplateMethod
+            template_method :some_method
+          end
+
+          Concrete.define_method(:some_method) do
+            'some value'
+          end
+        end
+
         module Module
           def self.example
             Example.new
