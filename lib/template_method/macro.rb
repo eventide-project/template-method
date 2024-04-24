@@ -28,8 +28,11 @@ module TemplateMethod
     alias :template_method :template_method_macro
 
     def template_method_variant_macro(method_name)
+      location = caller_locations(1, 1).first
+      file, line = location.path, location.lineno
+
       template_method_macro(method_name) do |*|
-        raise TemplateMethod::Error, "Implementation is required (Method name: #{method_name})"
+        raise TemplateMethod::Error, "Implementation is required (Method name: #{method_name}, Class: #{self.class.name}, Declaration: #{file}:#{line})"
       end
     end
     alias :template_method! :template_method_variant_macro
